@@ -1,0 +1,62 @@
+﻿.calendarPage {
+    .heading { display:flex; align-items:flex-end; justify-content:space-between; gap:25px; margin-bottom:26px;
+        h1 { margin-top:7px; font-size:clamp(38px,5vw,58px); line-height:1.05; letter-spacing:-.05em; }
+        > div:first-child > p:last-child { margin-top:9px; color:var(--muted); }
+    }
+    .label { color:var(--accent); font-size:11px; font-weight:750; letter-spacing:.1em; text-transform:uppercase; }
+    .monthPicker { display:flex; align-items:center; gap:15px;
+        strong { min-width:155px; text-align:center; font-size:15px; }
+        button { width:37px; height:37px; display:grid; place-items:center; border:1px solid var(--line); border-radius:50%; color:var(--ink); background:var(--card);
+            &:hover { border-color:var(--accent); box-shadow:0 2px 9px #2d6f8225; }
+        }
+    }
+    .content { display:grid; grid-template-columns:minmax(0,1fr) 310px; gap:20px; align-items:start; }
+    .monthCard { padding:15px; border:1px solid var(--line); border-radius:12px; background:var(--card); }
+    .weekdays,.days { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); }
+    .weekdays { margin-bottom:6px;
+        span { padding:6px 8px; color:var(--muted); font-size:11px; font-weight:700; text-align:left; }
+    }
+    .days { grid-auto-rows:minmax(91px,auto); }
+    .day { min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:4px; padding:8px; border:1px solid #e8eef1; background:var(--card); text-align:left;
+        > span { width:25px; height:25px; display:grid; place-items:center; border-radius:50%; font-size:12px; }
+        small { max-width:100%; overflow:hidden; padding:2px 5px; border-radius:4px; color:#245269; background:#e8f3f7; font-size:9px; text-overflow:ellipsis; white-space:nowrap; }
+        &:hover { border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); }
+    }
+    .outside { color:#aab5be; background:#f8fafb; }
+    .chosen > span { color:white; background:var(--accent); }
+    .today:not(.chosen) > span { color:var(--accent); border:1px solid var(--accent); font-weight:750; }
+    .coralEvent { color:#8c4f4a !important; background:#fbefed !important; }
+    .more { color:var(--muted) !important; background:transparent !important; }
+    .dayPanel { padding:20px; border:1px solid var(--line); border-radius:12px; background:var(--card); }
+    .panelHeading { display:flex; align-items:center; gap:12px;
+        > span { width:39px; height:39px; display:grid; place-items:center; border-radius:10px; color:var(--accent); background:#e6f0f3; }
+        p { color:var(--muted); font-size:10px; } h2 { margin-top:2px; font-size:16px; font-weight:700; }
+    }
+    .agendaHeading { display:flex; justify-content:space-between; margin-top:25px; padding-bottom:10px; border-bottom:1px solid var(--line);
+        strong { font-size:12px; } small { color:var(--muted); font-size:10px; }
+    }
+    .agenda { display:grid; }
+    .event { min-height:57px; display:grid; grid-template-columns:45px 1fr 25px; align-items:center; gap:9px; border-bottom:1px solid #edf1f3;
+        time { color:var(--accent); font-size:11px; font-weight:700; }
+        div { display:grid; } strong { font-size:11px; } small { color:var(--muted); font-size:9px; }
+        button { width:25px; height:25px; display:grid; place-items:center; border:0; border-radius:5px; color:var(--muted); background:transparent; &:hover { color:#a44848; box-shadow:0 2px 6px #0001; } }
+    }
+    .empty { padding:18px 0; color:var(--muted); font-size:11px; }
+    .addForm { display:grid; gap:10px; margin-top:18px;
+        label { display:grid; gap:5px; color:var(--muted); font-size:10px; font-weight:700; }
+        input { width:100%; height:37px; padding:0 9px; border:1px solid var(--line); border-radius:6px; background:var(--paper); font-size:11px; }
+        > div { display:flex; align-items:flex-end; gap:9px; }
+        > div label { flex:1; }
+        button { height:37px; display:flex; align-items:center; gap:6px; padding:0 11px; border:0; border-radius:6px; color:white; background:var(--accent); font-size:11px; font-weight:700; }
+    }
+    .localNote { margin-top:15px; color:var(--muted); font-size:9px; }
+    .backdrop { position:fixed; z-index:40; inset:0; display:grid; place-items:center; padding:20px; background:#14243288; }
+    .dialog { width:min(390px,100%); padding:25px; border-radius:12px; background:white;
+        > svg { color:#a44848; } h2 { margin-top:12px; font-size:21px; } p { margin-top:6px; color:var(--muted); font-size:13px; }
+        div { display:flex; justify-content:flex-end; gap:8px; margin-top:20px; }
+        button { min-height:36px; padding:0 12px; border:1px solid var(--line); border-radius:6px; background:white; font-size:11px; }
+        button:last-child { color:white; border-color:#a44848; background:#a44848; }
+    }
+    @media(max-width:900px) { .content { grid-template-columns:1fr; } .dayPanel { max-width:none; } }
+    @media(max-width:600px) { .heading { align-items:flex-start; flex-direction:column; } .monthPicker { width:100%; justify-content:space-between; } .monthCard { padding:7px; } .days { grid-auto-rows:minmax(68px,auto); } .day { gap:2px; padding:4px; } .day small { width:100%; font-size:8px; } .weekdays span { padding:4px 2px; text-align:center; font-size:9px; } }
+}
