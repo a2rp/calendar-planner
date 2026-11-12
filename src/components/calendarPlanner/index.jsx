@@ -28,8 +28,8 @@ const createDemoEvents = (referenceDate = new Date()) => {
     const lastDay = new Date(year, month + 1, 0).getDate();
 
     return [
-        { id: "demo-weekly-planning", date: dateKey(new Date(year, month, Math.min(8, lastDay))), time: "09:30", title: "Weekly planning", color: "blue" },
-        { id: "demo-project-review", date: dateKey(new Date(year, month, Math.min(12, lastDay))), time: "13:00", title: "Project review", color: "coral" },
+        { id: "demo-weekly-planning", date: dateKey(new Date(year, month, Math.min(8, lastDay))), time: "09:30", title: "Sample: planning", color: "blue" },
+        { id: "demo-project-review", date: dateKey(new Date(year, month, Math.min(12, lastDay))), time: "13:00", title: "Sample: review", color: "coral" },
     ];
 };
 
@@ -81,6 +81,7 @@ const CalendarPlanner = () => {
     const [title, setTitle] = useState("");
     const [time, setTime] = useState("09:00");
     const [removing, setRemoving] = useState(null);
+    const dialogRef = useRef(null);
     const cancelRef = useRef(null);
     const removeTriggerRef = useRef(null);
     const agendaHeadingRef = useRef(null);
@@ -110,7 +111,26 @@ const CalendarPlanner = () => {
         if (!removing) return undefined;
         cancelRef.current?.focus();
         const onKeyDown = (event) => {
-            if (event.key === "Escape") closeDialog();
+            if (event.key === "Escape") {
+                closeDialog();
+                return;
+            }
+            if (event.key !== "Tab") return;
+
+            const focusable = [...(dialogRef.current?.querySelectorAll("button, a, input, select, textarea, [tabindex]:not([tabindex='-1'])") ?? [])];
+            if (focusable.length === 0) {
+                event.preventDefault();
+                return;
+            }
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
         };
         window.addEventListener("keydown", onKeyDown);
         return () => window.removeEventListener("keydown", onKeyDown);
@@ -313,6 +333,7 @@ const CalendarPlanner = () => {
                 >
                     <section
                         className={styles.dialog}
+                        ref={dialogRef}
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="delete-title"

@@ -14,7 +14,7 @@ Move between months, select any visible date, and add an event with a title and 
 
 ## Data and limits
 
-Events are saved in localStorage in this browser. The calendar has no server connection, invitations, recurring-event rules, or synchronization. Clearing local browser storage removes saved events.
+The first visit starts with two sample events for the current month; delete them and add your own. Events are saved in localStorage in this browser. The calendar has no server connection, invitations, recurring-event rules, or synchronization. Clearing local browser storage removes saved events.
 
 ## Run locally
 
@@ -25,7 +25,7 @@ npm install
 npm run dev
 ```
 
-The app is built with React and Vite. Check the source and production build with:
+The app is built with React and Vite. It requires Node.js 20.19 or newer (or 22.12 or newer) and npm. Check the source and production build with:
 
 ```sh
 npm run lint
